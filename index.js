@@ -3,7 +3,7 @@
 
 var BasePlugin = require('ember-cli-deploy-plugin'),
     syncExec   = require('sync-exec'),
-    Promise    = require('ember-cli/lib/ext/promise');
+    RSVP       = require('rsvp');
 
 module.exports = {
   name: 'ember-cli-deploy-change-log',
@@ -97,12 +97,12 @@ module.exports = {
 
         var changeLog = JSON.parse(syncExec('git log ' + range + ' ' + merges + " --pretty=format:'" + JSON.stringify(changelog) + ",' $@ |     perl -pe 'BEGIN{print \"[\"}; END{print \"]\n\"}' |     perl -pe 's/},]/}]/'").stdout);
 
-        return Promise.resolve(changeLog);
+        return RSVP.resolve(changeLog);
       },
 
       _errorMessage: function(error) {
         this.log(error, { color: 'red' });
-        return Promise.reject(error);
+        return RSVP.reject(error);
       },
     });
 

@@ -44,6 +44,7 @@
   "dependencies": {
     "ember-cli-babel": "^5.1.5",
     "ember-cli-deploy-plugin": "^0.2.0",
+    "rsvp": "^4.8.4",
     "sync-exec": "^0.6.2"
   },
   "ember-addon": {
